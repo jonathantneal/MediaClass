@@ -46,8 +46,8 @@ Add an event with `addEvent`, which will run each time the media query changes t
 
 ```js
 MediaQuery('min-width: 640px').addEvent(function (matches, data) {
-	matches; // whether it passed or not
-	data; // the media query as a js object
+	matches; // whether the media query was matching or not
+	data; // the media query as a javascript object
 });
 ```
 
