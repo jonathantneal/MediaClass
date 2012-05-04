@@ -1,7 +1,7 @@
 MediaQuery
 ==========
 
-MediaQuery is a javascript-powered cross-browser media query and media query events handler.  It supports queries on the viewport and device as well as more advanced min/max greater-than/less-than queries. It is tested in all browsers on both PC and Mac systems, including the acient IE6+.
+MediaQuery is a javascript-powered cross-browser media query and media query events handler.  It supports queries on the viewport and device as well as more advanced min/max greater-than/less-than queries. It is tested in all browsers on both PC and Mac systems, including the ancient IE6+.
 
 What does it support, exactly?
 -----------
