@@ -12,7 +12,7 @@ MediaClass adds and removes responsive classnames to the document or individual 
 MediaClass("mobile", "(max-width: 480px)");
 ```
 
-## How do I use it?
+## So, how do I use it?
 
 Then, when the page is at or below 480px in width.
 
@@ -32,7 +32,7 @@ Then, when the element is at or below 480px in width.
 <div class="widget small"></div>
 ```
 
-## Further Usage
+## What else does it do?
 
 The _above_ or _below_ syntax expands targeting. _mobile-small_ triggers when the browser window is below 20em (320px) in width.
 
@@ -58,10 +58,10 @@ Remove it.
 mq.remove();
 ```
 
-## License
+## What's the license?
 
 MIT
 
-## Acknowledgements
+## And you are?
 
 MediaClass is a project by [Jonathan Neal](http://twitter.com/jon_neal).
