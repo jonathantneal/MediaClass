@@ -20,7 +20,7 @@ Then, when the page is at or below 480px in width.
 <html class="mobile">
 ```
 
-Additionally, selectors and a _this_ syntax target elements and their measurements.</p>
+Additionally, selectors and a __this__ syntax target elements and their measurements.</p>
 
 ```js
 MediaClass("small", ".widget:media(this-max-width: 480px)");
@@ -34,7 +34,7 @@ Then, when the element is at or below 480px in width.
 
 ## What else does it do?
 
-The _above_ or _below_ syntax expands targeting. _mobile-small_ triggers when the browser window is below 20em (320px) in width.
+The __above__ or __below__ syntax expands targeting. __mobile-small__ triggers when the browser window is below 20em (320px) in width.
 
 ```js
 MediaClass("mobile-small", "(max-width: 20em)");
