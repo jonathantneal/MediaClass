@@ -16,7 +16,7 @@ MediaClass("mobile", "(max-width: 480px)");
 Then, when the page is at or below 480px in width.
 
 ```html
-&lt;html class="mobile"&gt;
+<html class="mobile">
 ```
 
 Additionally, selectors and a _this_ syntax target elements and their measurements.</p>
@@ -28,7 +28,7 @@ MediaClass("small", ".widget:media(this-max-width: 480px)");
 Then, when the element is at or below 480px in width.
 
 ```html
-&lt;div class="widget small"&gt;&lt;/div&gt;
+<div class="widget small"></div>
 ```
 
 ## Further Usage
