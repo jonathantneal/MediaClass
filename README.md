@@ -1,77 +1,66 @@
-MediaQuery
-==========
+# MediaClass
 
-MediaQuery is a javascript-powered cross-browser media query and media query events handler.  It supports queries on the viewport and device as well as more advanced min/max greater-than/less-than queries. It is tested in all browsers on both PC and Mac systems, including the ancient IE6+.
+MediaClass adds and removes responsive classnames to the document or individual elements.
 
-What does it support, exactly?
+## What can it do, exactly?
 -----------
 
-* width / height / aspect-ratio / orientation / font-size
-* device-width / device-height / device-aspect-ratio / device-orientation
-* values written with em, in, pt, px, %, and empty suffixes.
-* min-property, max-property, property &lt;, property &gt;
+* width / height / aspect-ratio / orientation
+* values written with em, in, pt, px, and %.
+* device-*, this-*, min-*, max-*, below-*, above-*;
 
-How to use it
------------
+```js
+MediaClass("mobile", "(max-width: 480px)");
+```
 
-First, add the MediaQuery script to your site or page.
+Then, when the page is at or below 480px in width.
 
 ```html
-<script src="MediaQuery.js"></script>
+&lt;html class="mobile"&gt;
 ```
 
-Evaluate a query on the fly.
+Additionally, selectors and a _this_ syntax target elements and their measurements.</p>
 
 ```js
-var result = MediaQuery('min-width: 640px').matches; // returns a boolean: true or false if whether the media query was matching
+MediaClass("small", ".widget:media(this-max-width: 480px)");
 ```
 
-Save a media query object to be evaluated anytime later.
+Then, when the element is at or below 480px in width.
+
+```html
+&lt;div class="widget small"&gt;&lt;/div&gt;
+```
+
+## Further Usage
+
+The _above_ or _below_ syntax expands targeting. _mobile-small_ triggers when the browser window is below 20em (320px) in width.
 
 ```js
-var mq = MediaQuery('min-width: 640px');
-
-// many moments later
-
-mq.matches;
+MediaClass("mobile-small", "(max-width: 20em)");
 ```
 
-Read or replace a media query with the `query` method.
+Assign the query to a variable.
 
 ```js
-MediaQuery('min-width: 640px').query('width > 640px').query; // returns a string: "width > 640px"
+var mq = MediaClass("mobile-small", "(max-width: 20em)");
 ```
 
-Add an event with `addEvent`, which will run each time the media query changes to or from matching.
+Change it.
+
+```
+mq.media = "(below-width: 20em)");
+```
+
+Remove it.
 
 ```js
-MediaQuery('min-width: 640px').addEvent(function (matches, data) {
-	matches; // whether the media query was matching or not
-	data; // the media query as a javascript object
-});
+mq.remove();
 ```
 
-Add a classname to &lt;html&gt; with `addClass`, which will only be added when the media query is matching.
-
-```js
-MediaQuery('width < 768').addClass('handheld');
-```
-
-Browser support
------------
-
-* Google Chrome
-* Mozilla Firefox 3+
-* Apple Safari 4+
-* Opera 10+
-* Internet Explorer 6+
-
-License
------------
+## License
 
 MIT
 
-Acknowledgements
-------------
+## Acknowledgements
 
-MediaQuery is a project by [Jonathan Neal](http://github.com/jonathantneal).
+MediaClass is a project by [Jonathan Neal](http://twitter.com/jon_neal).
