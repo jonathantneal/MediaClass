@@ -3,7 +3,6 @@
 MediaClass adds and removes responsive classnames to the document or individual elements.
 
 ## What can it do, exactly?
------------
 
 * width / height / aspect-ratio / orientation
 * values written with em, in, pt, px, and %.
