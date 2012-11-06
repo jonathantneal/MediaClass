@@ -2,15 +2,17 @@
 
 MediaClass adds and removes responsive classnames to the document or individual elements.
 
-## What can it do, exactly?
+## What queries does it support, exactly?
 
 * width / height / aspect-ratio / orientation
-* values written with em, in, pt, px, and %.
-* device-*, this-*, min-*, max-*, below-*, above-*;
+* device-*, this-*, min-*, max-*, below-*, and above-*.
+* em, in, pt, px, and %.
 
 ```js
 MediaClass("mobile", "(max-width: 480px)");
 ```
+
+## How do I use it?
 
 Then, when the page is at or below 480px in width.
 
