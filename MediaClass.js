@@ -100,14 +100,12 @@
 		self.className = className;
 		self.media = mediaQuery;
 		self.index = mediaList.push(self) - 1;
-		self.enable = function () { if (!enabled) { mediaList.push(self); enabled = true; } };
+		self.enable = function () { if (!enabled) { self.index = mediaList.push(self) - 1; enabled = true; } };
 		self.disable = function () { if (enabled) { mediaList.splice(self.index, 1); enabled = false; } };
 	}
 
 	global.MediaClass = function (className, mediaQuery) {
 		var mq = new MediaQuery(className, mediaQuery);
-
-		mediaList.push(mq);
 
 		return mq;
 	};
