@@ -1,6 +1,11 @@
 /*! MediaClass.js v0.0.1 | MIT License | github.com/jonathantneal/MediaClass */
 
 (function (global, documentElement) {
+  function resetMediaFeatures() {
+    if(global.resetTimer) clearTimeout(global.resetTimer);
+    global.resetTimer = setTimeout(getMediaFeatures, 100);
+  }
+
 	function getMediaFeatures() {
 		media.width = global.innerWidth || documentElement.clientWidth;
 		media.height = global.innerHeight || documentElement.clientHeight;
@@ -11,6 +16,7 @@
 		media.deviceHeight = screen.height;
 		media.deviceAspectRatio = media.deviceWidth / media.deviceHeight;
 		media.deviceOrientation = media.deviceWidth > media.deviceHeight ? "landscape" : "portrait";
+    mediaLoop();
 	}
 
 	function getElementMediaFeatures(element) {
@@ -53,18 +59,17 @@
 	}
 
 	var
-	changed = false,
 	media = { all: true, screen: true, print: false },
 	eventMethod = ("addEventListener" in global ? "addEventListener " : "attachEvent on").split(" "),
 	eventType = "blur orientationchange resize".split(" "),
 	eventIndex = 0;
 
-	for (;eventType[eventIndex]; ++eventIndex) {
-		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], getMediaFeatures);
+	for (; eventType[eventIndex]; ++eventIndex) {
+		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], resetMediaFeatures);
 	}
 
 	var
-	LastIndexOf = Array.prototype.lastIndexOf || function (value) { for (var length = this.length; --length > -1;) if (this[length] == value) break; return length; };
+	LastIndexOf = Array.prototype.lastIndexOf || function (value) { for (var length = this.length; --length > -1;) if (this[length] == value) break; return length; },
 	addClass = function (element, className) {
 		var classList = element.className ? element.className.split(/\s+/) : [], index = LastIndexOf.call(classList, className);
 		if (index < 0) element.className = classList.concat(className).join(" ");
@@ -101,17 +106,17 @@
 		self.className = className;
 		self.media = mediaQuery;
 		self.index = mediaList.push(self) - 1;
-		self.enable = function () { if (!enabled) { mediaList.push(self); enabled = true; } };
+		self.enable = function () { if (!enabled) { self.index = mediaList.push(self) - 1; enabled = true; } };
 		self.disable = function () { if (enabled) { mediaList.splice(self.index, 1); enabled = false; } };
 	}
 
 	global.MediaClass = function (className, mediaQuery) {
 		var mq = new MediaQuery(className, mediaQuery);
 
-		mediaList.push(mq);
+    mediaLoop();
 
 		return mq;
 	};
 
-	getMediaFeatures(); mediaLoop(); setInterval(mediaLoop, 66);
+	getMediaFeatures();
 })(this, document.documentElement);
