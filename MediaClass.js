@@ -53,18 +53,17 @@
 	}
 
 	var
-	changed = false,
 	media = { all: true, screen: true, print: false },
 	eventMethod = ("addEventListener" in global ? "addEventListener " : "attachEvent on").split(" "),
 	eventType = "blur orientationchange resize".split(" "),
 	eventIndex = 0;
 
-	for (;eventType[eventIndex]; ++eventIndex) {
+	for (; eventType[eventIndex]; ++eventIndex) {
 		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], getMediaFeatures);
 	}
 
 	var
-	LastIndexOf = Array.prototype.lastIndexOf || function (value) { for (var length = this.length; --length > -1;) if (this[length] == value) break; return length; };
+	LastIndexOf = Array.prototype.lastIndexOf || function (value) { for (var length = this.length; --length > -1;) if (this[length] == value) break; return length; },
 	addClass = function (element, className) {
 		var classList = element.className ? element.className.split(/\s+/) : [], index = LastIndexOf.call(classList, className);
 		if (index < 0) element.className = classList.concat(className).join(" ");
