@@ -1,6 +1,11 @@
 /*! MediaClass.js v0.0.1 | MIT License | github.com/jonathantneal/MediaClass */
 
 (function (global, documentElement) {
+  function resetMediaFeatures() {
+    if(global.resetTimer) clearTimeout(global.resetTimer);
+    global.resetTimer = setTimeout(getMediaFeatures, 100);
+  }
+
 	function getMediaFeatures() {
 		media.width = global.innerWidth || documentElement.clientWidth;
 		media.height = global.innerHeight || documentElement.clientHeight;
@@ -11,6 +16,7 @@
 		media.deviceHeight = screen.height;
 		media.deviceAspectRatio = media.deviceWidth / media.deviceHeight;
 		media.deviceOrientation = media.deviceWidth > media.deviceHeight ? "landscape" : "portrait";
+    mediaLoop();
 	}
 
 	function getElementMediaFeatures(element) {
@@ -59,7 +65,7 @@
 	eventIndex = 0;
 
 	for (; eventType[eventIndex]; ++eventIndex) {
-		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], getMediaFeatures);
+		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], resetMediaFeatures);
 	}
 
 	var
@@ -107,8 +113,10 @@
 	global.MediaClass = function (className, mediaQuery) {
 		var mq = new MediaQuery(className, mediaQuery);
 
+    mediaLoop();
+
 		return mq;
 	};
 
-	getMediaFeatures(); mediaLoop(); setInterval(mediaLoop, 66);
+	getMediaFeatures();
 })(this, document.documentElement);
