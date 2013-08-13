@@ -61,11 +61,16 @@
 	var
 	media = { all: true, screen: true, print: false },
 	eventMethod = ("addEventListener" in global ? "addEventListener " : "attachEvent on").split(" "),
-	eventType = "blur orientationchange resize".split(" "),
+	eventType = "blur orientationchange click".split(" "),
+	throttledEventType = "resize scroll".split(" "),
 	eventIndex = 0;
 
 	for (; eventType[eventIndex]; ++eventIndex) {
-		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], resetMediaFeatures);
+		global[eventMethod[0]](eventMethod[1] + eventType[eventIndex], getMediaFeatures);
+	}
+	
+	for (eventIndex = 0; throttledEventType[eventIndex]; ++eventIndex) {
+		global[eventMethod[0]](eventMethod[1] + throttledEventType[eventIndex], resetMediaFeatures);
 	}
 
 	var
@@ -91,11 +96,16 @@
 					for (var index = 0; element = all[index]; ++index) {
 						/this/.test(match[2]) && getElementMediaFeatures(element);
 
-						evalMediaQuery(match[2]) ? addClass(element, item.className) : removeClass(element, item.className);
+						if(element.clientWidth > 0) {
+							evalMediaQuery(match[2]) ? addClass(element, item.className) : removeClass(element, item.className);
+						}
+
 					}
 				}
 			} else {
-				evalMediaQuery(item.media) ? addClass(documentElement, item.className) : removeClass(documentElement, item.className);
+				if(element.clientWidth > 0) {
+					evalMediaQuery(item.media) ? addClass(documentElement, item.className) : removeClass(documentElement, item.className);
+				}
 			}
 		}
 	}
@@ -108,6 +118,7 @@
 		self.index = mediaList.push(self) - 1;
 		self.enable = function () { if (!enabled) { self.index = mediaList.push(self) - 1; enabled = true; } };
 		self.disable = function () { if (enabled) { mediaList.splice(self.index, 1); enabled = false; } };
+		self.refresh = function() { mediaLoop(); };
 	}
 
 	global.MediaClass = function (className, mediaQuery) {
